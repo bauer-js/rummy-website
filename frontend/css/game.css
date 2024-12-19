@@ -1,0 +1,79 @@
+body {
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    background-color: #2F4550;
+}
+
+:root {
+    /* cards */
+    --height_card: 70%;
+    --height_card_div: 14%;
+    --overlap_margin: -3%;
+}
+
+.cards {
+
+
+    height: var(--height_card_div);
+    width: 94%;
+
+
+    /* Flexbox */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    /* positioning */
+    position: fixed;
+    bottom: 0.5%;
+    margin-inline: 3%;
+}
+
+.cardsEnemy {
+
+
+    height: var(--height_card_div);
+    width: 94%;
+
+
+    /* Flexbox */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    /* positioning */
+    position: fixed;
+    top: 2%;
+    margin-inline: 3%;
+}
+
+/* Card adjustments */
+
+.card {
+    height: var(--height_card);
+    margin-inline: var(--overlap_margin);
+}
+
+.deckCard {
+    height: var(--height_card);
+    margin-inline: 2%
+}
+
+.deck {
+    height: var(--height_card_div) + 2%;
+    width: 50%;
+
+
+    /* Flexbox */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    /* positioning */
+    position: fixed;
+    top: 30%;
+    margin: 25%;
+
+}
