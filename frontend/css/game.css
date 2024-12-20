@@ -10,7 +10,7 @@ body {
     /* cards */
     --height_card: 70%;
     --height_card_div: 14%;
-    --overlap_margin: -3%;
+    --overlap_margin: -2.7%;
 }
 
 .cards {
@@ -24,6 +24,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
 
     /* positioning */
     position: fixed;
@@ -56,6 +57,22 @@ body {
     margin-inline: var(--overlap_margin);
 }
 
+#active {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    height: var(--height_card_div);
+    width: 95%;
+    margin-inline: 2.5%;
+
+    bottom: 15%;
+}
+
+
 .deckCard {
     height: var(--height_card);
     margin-inline: 2%
@@ -72,8 +89,7 @@ body {
     justify-content: center;
 
     /* positioning */
-    position: fixed;
+    position: absolute;
     top: 30%;
     margin: 25%;
-
 }
