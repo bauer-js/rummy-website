@@ -95,3 +95,7 @@ body {
     top: 30%;
     margin: 25%;
 }
+
+#dis {
+    display: none; /* hides element until a card is available to take from discard */
+}

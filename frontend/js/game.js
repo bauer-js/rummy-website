@@ -11,6 +11,8 @@ const card9 = document.querySelector("#card9");
 const card10 = document.querySelector("#card10");
 const activeField = document.querySelector("#active");
 const handField = document.querySelector("#hand");
+const deckElement = document.querySelector("#draw");
+const discardElement = document.querySelector("#dis");
 
 let activatedCount = 0;
 
@@ -385,7 +387,7 @@ let enemyHand = [
 
 // page elements
 
-console.log(cardList[50]);
+
 // Object modification: 
 //myCollection.data[i]={key:value};
 
@@ -393,7 +395,7 @@ console.log(cardList[50]);
 // Decks
 
 let deck = [];
-
+let discardDeck = [];
 // Shuffle
 
 function shuffleAlgorithm(array) {
@@ -413,7 +415,7 @@ function deal() {
     for (let i = 0; i <= 9; i++) { // for loop to modify hand array and set the image source on webpage. this loop is player only.
         hand[i].filePath = deck[0].fileName;
         hand[i].value = deck[0].value;
-        hand[i].suit = deck[0].suit; 
+        hand[i].rank = deck[0].rank; 
         deck.shift();
         changeImg(hand[i].position, hand[i].filePath);
 
@@ -434,23 +436,64 @@ function clicked(pos, active) {
         if (activatedCount < 4) {
             hand[pos].active = true;
             activatedCount++;
- //           card1.style.height="80%";
+
             activeField.insertAdjacentElement('afterbegin', hand[pos].var);
-            console.log(activatedCount);
+
 
         } else {
-            console.log(activatedCount);
+
         };
         
     } else {
         hand[pos].active = false;
         handField.insertAdjacentElement('afterbegin', hand[pos].var);
-            console.log(activatedCount);
+
         activatedCount--;
         console.log(activatedCount);
 
     };
 }
+
+function discard(deckInfo, player) { //TODO: add code that reshuffles the deck once the discard pile has too many cards. May need a variable to adjust for cards that are locked.
+    if (activatedCount === 1) { // Checks if more than one card is selected
+        
+        // Variables, exclusive to this block
+        let discardCard = {};
+        let cardPos;
+        
+        if (player === true) { // if it is the player's turn
+            for (let i = 0; i <= 9; i++) { // Checks which card is active
+                if (hand[i].active === true) { // Sets discardCard and card position info
+                    discardCard.filePath = hand[i].filePath;
+                    discardCard.value = hand[i].value;
+                    discardCard.rank = hand[i].rank;
+                    cardPos = i;
+                }
+        }
+        discardDeck.unshift(discardCard); // Adds discard to the deck
+        discardElement.style.display = "block";
+        changeImg("#dis", discardDeck[0].filePath);
+        if (deckInfo === 'deck') { // Checks what deck it is then pulls fronm said deck
+            hand[cardPos].filePath = deck[0].fileName;
+            hand[cardPos].value = deck[0].value;
+            hand[cardPos].rank = deck[0].rank; 
+            deck.shift();
+            changeImg(hand[cardPos].position, hand[cardPos].filePath);
+
+        } else if (deckInfo === 'discard') { // Pulls from discard deck
+            hand[cardPos].filePath = discardDeck[1].fileName;
+            hand[cardPos].value = discardDeck[1].value;
+            hand[cardPos].rank = discardDeck[1].rank;
+            discardDeck.splice(1, 1);
+            changeImg(hand[cardPos].position, hand[cardPos].filePath);
+        }
+        }
+        clicked(cardPos, true);
+    } else if (activatedCount > 1) {
+        console.log("too many cards selected")
+    }
+}
+
 // note to self: learn e.preventDefault and how it works
 card1.addEventListener("click", ((e) => {
     e.preventDefault();
@@ -491,4 +534,12 @@ card9.addEventListener("click", ((e) => {
 card10.addEventListener("click", ((e) => {
     e.preventDefault();
     clicked(9, hand[9].active);
+}))
+deckElement.addEventListener("click", ((e) => {
+    e.preventDefault();
+    discard('deck', true);
+}))
+discardElement.addEventListener("click", ((e) => {
+    e.preventDefault();
+    discard('discard', true);
 }))
