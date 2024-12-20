@@ -13,88 +13,317 @@ const activeField = document.querySelector("#active");
 const handField = document.querySelector("#hand");
 
 let activatedCount = 0;
-// #.2 = Hearts, #.4 = Diamonds, #.5 = Spades, #.7 = Clubs
-const cardList = ["A.2", "A.4", "A.5", "A.7", 
-     "2.2", "2.4", "2.5", "2.7", 
-     "3.2", "3.4", "3.5", "3.7",
-     "4.2", "4.4", "4.5", "4.7", 
-     "5.2", "5.4", "5.5", "5.7",
-     "6.2", "6.4", "6.5", "6.7",
-     "7.2", "7.4", "7.5", "7.7",
-     "8.2", "8.4", "8.5", "8.7",
-     "9.2", "9.4", "9.5", "9.7",
-     "10.2", "10.4", "10.5", "10.7",
-     "J2", "J4", "J5", "J7",
-     "Q2", "Q4", "Q5", "Q7",
-     "K2", "K4", "K5", "K7"];
+
+// List of objects that provide necessary details to program about cards
+const cardList = [
+    {
+        fileName: "Clubs_ACE.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_2.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_3.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_4.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_5.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_6.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_7.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_8.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_9.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_10.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_J.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_Q.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Clubs_K.png",
+        value: "A",
+        rank: "Clubs"
+    },  {
+        fileName: "Diamonds_ACE.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_2.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_3.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_4.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_5.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_6.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_7.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_8.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_9.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_10.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_J.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_Q.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Diamonds_K.png",
+        value: "A",
+        rank: "Diamonds"
+    },  {
+        fileName: "Hearts_ACE.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_2.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_3.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_4.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_5.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_6.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_7.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_8.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_9.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_10.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_J.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_Q.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Hearts_K.png",
+        value: "A",
+        rank: "Hearts"
+    },  {
+        fileName: "Spades_ACE.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_2.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_3.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_4.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_5.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_6.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_7.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_8.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_9.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_10.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_J.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_Q.png",
+        value: "A",
+        rank: "Spades"
+    },  {
+        fileName: "Spades_K.png",
+        value: "A",
+        rank: "Spades"
+    },  
+];
+
 // Hands. Do not modify position value
 let hand = [
     {
         position: "#card1",
+        filePath: "",
         value: "",
+        rank: "",
         locked: false,
         active: false,
         var: card1
     },
     {
         position: "#card2",
+        filePath: "",
         value: "",
+        rank: "",
+
         locked: false,
         active: false,
         var: card2
     },
     {
         position: "#card3",
+        filePath: "",
         value: "",
+        rank: "",
+
         locked: false,
         active: false,
         var: card3
     },
     {
         position: "#card4",
+        filePath: "",
         value: "",
+        rank: "",
+
         locked: false,
         active: false,
         var: card4
     },
     {
         position: "#card5",
+        filePath: "",
         value: "",
+        rank: "",
+
         locked: false,
         active: false,
         var: card5
     },
     {
         position: "#card6",
+        filePath: "",
         value: "",
+        rank: "",
+
         locked: false,
         active: false,
         var: card6
     },
     {
         position: "#card7",
+        filePath: "",
         value: "",
+        rank: "",
+
         locked: false,
         active: false,
         var: card7
     },
     {
         position: "#card8",
+        filePath: "",
         value: "",
+        rank: "",
+
         locked: false,
         active: false,
         var: card8
     },
     {
         position: "#card9",
+        filePath: "",
         value: "",
+        rank: "",
+
         locked: false,
         active: false,
         var: card9
     },
     {
         position: "#card10",
+        filePath: "",
         value: "",
+        rank: "",
+
         locked: false,
         active: false,
         var: card10
@@ -156,7 +385,7 @@ let enemyHand = [
 
 // page elements
 
-
+console.log(cardList[50]);
 // Object modification: 
 //myCollection.data[i]={key:value};
 
@@ -182,22 +411,24 @@ function shuffleAlgorithm(array) {
 
 function deal() {
     for (let i = 0; i <= 9; i++) { // for loop to modify hand array and set the image source on webpage. this loop is player only.
-        hand[i].value = deck[0]; // adds the first card from the deck array to a hand.
+        hand[i].filePath = deck[0].fileName;
+        hand[i].value = deck[0].value;
+        hand[i].suit = deck[0].suit; 
         deck.shift();
-        changeImg(hand[i].position, deck[0]);
-        console.log(hand[i].value);
+        changeImg(hand[i].position, hand[i].filePath);
+
     }
 
 }
 
 function changeImg(position, card) { // Changes the card image on the website
     const toBeChanged = document.querySelector(position);
-    toBeChanged.src = ("/frontend/images/deck-of-cards/" + card + ".png")
+    toBeChanged.src = ("/frontend/images/cards/" + card);
 }
+
 shuffleAlgorithm(cardList);
 deal();
 
-console.log(deck.length);
 function clicked(pos, active) {
     if(active === false) {
         if (activatedCount < 4) {
