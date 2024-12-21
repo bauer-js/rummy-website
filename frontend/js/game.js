@@ -481,11 +481,14 @@ function discard(deckInfo, player) { //TODO: add code that reshuffles the deck o
             changeImg(hand[cardPos].position, hand[cardPos].filePath);
 
         } else if (deckInfo === 'discard') { // Pulls from discard deck
+            console.log(discardDeck[1])
             hand[cardPos].filePath = discardDeck[1].fileName;
             hand[cardPos].value = discardDeck[1].value;
             hand[cardPos].rank = discardDeck[1].rank;
+            changeImg(hand[cardPos].position, discardDeck[1].filePath);
             discardDeck.splice(1, 1);
-            changeImg(hand[cardPos].position, hand[cardPos].filePath);
+
+            console.log(cardPos);
         }
         }
         clicked(cardPos, true);
