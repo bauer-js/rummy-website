@@ -99,3 +99,14 @@ body {
 #dis {
     display: none; /* hides element until a card is available to take from discard */
 }
+
+.placebutton { /* Places the button above the active section */
+    position: fixed;
+    display: flex;
+    width: 20%;
+    border: solid white;
+}
+
+button { /* Styles all button elements */
+
+}

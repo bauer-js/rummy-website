@@ -425,7 +425,7 @@ function deal() {
 
 function changeImg(position, card) { // Changes the card image on the website
     const toBeChanged = document.querySelector(position);
-    toBeChanged.src = ("/frontend/images/cards/" + card);
+    toBeChanged.src = ("./frontend/images/cards/" + card);
 }
 
 shuffleAlgorithm(cardList);
