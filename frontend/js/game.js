@@ -13,7 +13,7 @@ const activeField = document.querySelector("#active");
 const handField = document.querySelector("#hand");
 const deckElement = document.querySelector("#draw");
 const discardElement = document.querySelector("#dis");
-
+const placeElement = document.querySelector("#place");
 let activatedCount = 0;
 
 // List of objects that provide necessary details to program about cards
@@ -438,10 +438,11 @@ function clicked(pos, active) {
             activatedCount++;
 
             activeField.insertAdjacentElement('afterbegin', hand[pos].var);
-
+            if (activatedCount > 0) {
+                placeElement.innerText = "Show";
+            }
 
         } else {
-
         };
         
     } else {
@@ -449,6 +450,9 @@ function clicked(pos, active) {
         handField.insertAdjacentElement('afterbegin', hand[pos].var);
 
         activatedCount--;
+        if (activatedCount === 0) {
+            placeElement.innerText = "Rummy";
+        }
         console.log(activatedCount);
 
     };
@@ -494,6 +498,14 @@ function discard(deckInfo, player) { //TODO: add code that reshuffles the deck o
         clicked(cardPos, true);
     } else if (activatedCount > 1) {
         console.log("too many cards selected")
+    }
+}
+
+function showRummy() { // Show cards or Rummy cards (Rummy = all cards shown at once)
+    if (activatedCount === 0) { // Rummy function
+
+    } else {
+
     }
 }
 
