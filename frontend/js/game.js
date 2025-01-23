@@ -15,7 +15,11 @@ const deckElement = document.querySelector("#draw");
 const discardElement = document.querySelector("#dis");
 const placeElement = document.querySelector("#place");
 let activatedCount = 0;
-
+let activatedCountEnemy = 0;
+let meldsThree = 0;
+let meldsThreeEnemy = 0;
+let meldsFour = 0;
+let meldsFourEnemy = 0;
 // List of objects that provide necessary details to program about cards
 const cardList = [
     {
@@ -501,10 +505,41 @@ function discard(deckInfo, player) { //TODO: add code that reshuffles the deck o
     }
 }
 
-function showRummy() { // Show cards or Rummy cards (Rummy = all cards shown at once)
-    if (activatedCount === 0) { // Rummy function
+function locked(cardPosition, turn) {
 
-    } else {
+}
+
+
+function showRummy(activatedCountCheck, handCheck, meldsThreeCheck, meldsFourCheck, whoIs) { // Show cards or Rummy cards (Rummy = all cards shown at once)
+    let activeCards = [];
+    let cardPositions = [];
+    if (activatedCountCheck === 0) { // Rummy function
+
+    } else if (activatedCountCheck === 3 && meldsThreeCheck <= 2) {
+        for (let i = 0; i <= 9; i++) { //Check active cards
+            if (handCheck[i].active === true) {
+                activeCards.push(handCheck[i]);
+                cardPositions.push([i]);
+            }
+        }
+        
+        // Checks if active cards are a set
+        let setValue = activeCards[0].value;
+        let matching = 0;
+        for (let i = 0; i > 2; i++) {
+            if (activeCards[i].value === setValue) {
+                matching++;
+            } 
+        }
+        if (matching >= 2 && whoIs === "player") {
+            for (let i = 0; i > cardPositions.length; i++) { // Changes the locked status on card using locking function and adds to melds
+
+            }
+        } else if (matching >= 2 && whoIs === "enemy") {
+
+        }
+
+    } else if (activatedCountCheck === 4 && meldsFourCheck === 0) {
 
     }
 }
