@@ -506,7 +506,12 @@ function discard(deckInfo, player) { //TODO: add code that reshuffles the deck o
 }
 
 function locked(cardPosition, turn) {
-
+    let toBeHidden;
+    if (turn === "player") {
+        hand[cardPosition].locked = true;
+        toBeHidden = document.querySelector(hand[cardPosition].position);
+    }
+    toBeHidden.style.display = "none";
 }
 
 
