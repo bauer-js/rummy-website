@@ -15,10 +15,7 @@ const deckElement = document.querySelector("#draw");
 const discardElement = document.querySelector("#dis");
 const placeElement = document.querySelector("#place");
 
-let meldsThree = 0;
-let meldsThreeEnemy = 0;
-let meldsFour = false;
-let meldsFourEnemy = false;
+
 // List of objects that provide necessary details to program about cards
 const cardList = [
     {
@@ -446,7 +443,6 @@ function clicked(pos, active,) {
         if (activeCards.length < 4) {
             hand[pos].active = true;
             activeCards.push(pos);
-            
 
             activeField.insertAdjacentElement('afterbegin', hand[pos].var);
             if (activeCards.length > 0) {
@@ -494,7 +490,9 @@ function discard(deckInfo, player) { //TODO: add code that reshuffles the deck o
             hand[cardPos].rank = deck[0].rank; 
             deck.shift();
             changeImg(hand[cardPos].position, hand[cardPos].filePath);
-
+            if (deck.length === 0) {
+                shuffleAlgorithm(discardDeck);
+            }
         } else if (deckInfo === 'discard') { // Pulls from discard deck
             console.log(discardDeck[1])
             hand[cardPos].filePath = discardDeck[1].fileName;
@@ -514,57 +512,76 @@ function discard(deckInfo, player) { //TODO: add code that reshuffles the deck o
 
 function locked(cardPosition, turn) {
     let toBeHidden;
-    if (turn === "player") {
+
         hand[cardPosition].locked = true;
         toBeHidden = document.querySelector(hand[cardPosition].position);
-    }
     toBeHidden.style.display = "none";
 }
 
-// TODO: Rewrite function and test throughout
+function lockCards(lock, whoIs) { // lock variable is an array of the card positions to lock.
+    if (whoIs === "player") {
+        for (let i = 0; i < lock.length; i++) {
+            const lockingCard = lock[i];
+            hand[lock[i]].locked = true;
+            toBeHidden = document.querySelector(hand[lock[i]].position);
+            toBeHidden.style.display = "none";
+
+        }
+    activeCards = [];
+    }
+
+    
+}
 
 const allEqual = arr => arr.every(val => val === arr[0]);
-
-function showRummy(handField, meldsThreeField, meldsFourField, activeCardsArray, whoIs) {
+let meldsThreePlayer = [];
+let meldsFourPlayer = []
+function showRummy(handField, activeCardsArray, whoIs) {
     if (activeCardsArray.length === 0) { // Rummy function
         console.log("rummy");
         
 
-    } else if (activeCardsArray.length === 3 && meldsThreeField <= 2) { // Three meld function
+    } else if (activeCardsArray.length === 3 && meldsThreePlayer.length != 6) { // Three meld function
         console.log("meld of three");
         let meldHand = [];
         for (let i = 0; i < 3; i++) {
             meldHand.push(handField[activeCardsArray[i]]); // Tested, works correctly
             console.log(meldHand[i]);
         }
-        const cardValues = meldHand.map((card) => { // Tested, works correctly
+        const cardValues = meldHand.map((card) => { // Gets card values
             return card.value;
         })
+        const cardRanks = meldHand.map((card) => { // Gets card ranks
+            return card.rank;
+        })
 
-        const allMeldTrue = allEqual(cardValues); // Tested, works correctly
+        // Checks if it is a set
 
-        console.log(allMeldTrue);
+        const allMeldValueTrue = allEqual(cardValues); 
 
-        // console.log(cardValues);
+        // Checks if it is a run
 
-        /* 
-            const cardValues = meldHand.map(( card ) => {card.value})  Extract individual card values from a meld
+        const allMeldRankTrue = allEqual(cardRanks); 
 
-            const allMeldTue = allEqual(cardValues) Checks all cards in array are the same and returns true or false
+
+        // Conditions to decide whether it is a set or run.
+
+        console.log(allMeldValueTrue);
+        if (allMeldValueTrue === true) {
+            if (whoIs === "player") {
+                lockCards(activeCardsArray, "player");
+                for (let n = 0; meldHand.length != n; n++) {
+                    meldsThreePlayer.push(meldHand[n]); // Tested, IT WORKS WOOOOOO
+                }
+                console.log(meldsThreePlayer);
+            } else if (whoIs === "enemy") {
         
-        */
+            }
+        } else if (true) {
 
-        // for (let i = 0; activeCardsArray.length <= 2; i++) { // Checks if cards are a set
-        //     if (handField[activeCardsArray[i]].value === matchingValue) { 
-        //         matching++;
-        //     }
-        //     if (matching === 3) { // if all three values are matching, it is a set.
-        //         set = true;
-        //     }
-        //     console.log(set);
-        //}
+        }
 
-    } else if (activeCardsArray.length === 4 && meldsFourField === false) { // Four meld function
+    } else if (activeCardsArray.length === 4) { // Four meld function
         console.log("meld of four");
 
 
@@ -663,5 +680,5 @@ discardElement.addEventListener("click", ((e) => {
 }))
 placeElement.addEventListener("click", ((e) => {
     e.preventDefault();
-    showRummy(hand, meldsThree, meldsFour, activeCards, "player");
+    showRummy(hand, activeCards, "player");
 })) 
