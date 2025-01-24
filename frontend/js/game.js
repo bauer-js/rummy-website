@@ -14,12 +14,11 @@ const handField = document.querySelector("#hand");
 const deckElement = document.querySelector("#draw");
 const discardElement = document.querySelector("#dis");
 const placeElement = document.querySelector("#place");
-let activatedCount = 0;
-let activatedCountEnemy = 0;
+
 let meldsThree = 0;
 let meldsThreeEnemy = 0;
-let meldsFour = 0;
-let meldsFourEnemy = 0;
+let meldsFour = false;
+let meldsFourEnemy = false;
 // List of objects that provide necessary details to program about cards
 const cardList = [
     {
@@ -28,51 +27,51 @@ const cardList = [
         rank: "Clubs"
     },  {
         fileName: "Clubs_2.png",
-        value: "A",
+        value: "2",
         rank: "Clubs"
     },  {
         fileName: "Clubs_3.png",
-        value: "A",
+        value: "3",
         rank: "Clubs"
     },  {
         fileName: "Clubs_4.png",
-        value: "A",
+        value: "4",
         rank: "Clubs"
     },  {
         fileName: "Clubs_5.png",
-        value: "A",
+        value: "5",
         rank: "Clubs"
     },  {
         fileName: "Clubs_6.png",
-        value: "A",
+        value: "6",
         rank: "Clubs"
     },  {
         fileName: "Clubs_7.png",
-        value: "A",
+        value: "7",
         rank: "Clubs"
     },  {
         fileName: "Clubs_8.png",
-        value: "A",
+        value: "8",
         rank: "Clubs"
     },  {
         fileName: "Clubs_9.png",
-        value: "A",
+        value: "9",
         rank: "Clubs"
     },  {
         fileName: "Clubs_10.png",
-        value: "A",
+        value: "10",
         rank: "Clubs"
     },  {
         fileName: "Clubs_J.png",
-        value: "A",
+        value: "J",
         rank: "Clubs"
     },  {
         fileName: "Clubs_Q.png",
-        value: "A",
+        value: "Q",
         rank: "Clubs"
     },  {
         fileName: "Clubs_K.png",
-        value: "A",
+        value: "K",
         rank: "Clubs"
     },  {
         fileName: "Diamonds_ACE.png",
@@ -80,51 +79,51 @@ const cardList = [
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_2.png",
-        value: "A",
+        value: "2",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_3.png",
-        value: "A",
+        value: "3",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_4.png",
-        value: "A",
+        value: "4",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_5.png",
-        value: "A",
+        value: "5",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_6.png",
-        value: "A",
+        value: "6",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_7.png",
-        value: "A",
+        value: "7",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_8.png",
-        value: "A",
+        value: "8",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_9.png",
-        value: "A",
+        value: "9",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_10.png",
-        value: "A",
+        value: "10",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_J.png",
-        value: "A",
+        value: "J",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_Q.png",
-        value: "A",
+        value: "Q",
         rank: "Diamonds"
     },  {
         fileName: "Diamonds_K.png",
-        value: "A",
+        value: "K",
         rank: "Diamonds"
     },  {
         fileName: "Hearts_ACE.png",
@@ -132,51 +131,51 @@ const cardList = [
         rank: "Hearts"
     },  {
         fileName: "Hearts_2.png",
-        value: "A",
+        value: "2",
         rank: "Hearts"
     },  {
         fileName: "Hearts_3.png",
-        value: "A",
+        value: "3",
         rank: "Hearts"
     },  {
         fileName: "Hearts_4.png",
-        value: "A",
+        value: "4",
         rank: "Hearts"
     },  {
         fileName: "Hearts_5.png",
-        value: "A",
+        value: "5",
         rank: "Hearts"
     },  {
         fileName: "Hearts_6.png",
-        value: "A",
+        value: "6",
         rank: "Hearts"
     },  {
         fileName: "Hearts_7.png",
-        value: "A",
+        value: "7",
         rank: "Hearts"
     },  {
         fileName: "Hearts_8.png",
-        value: "A",
+        value: "8",
         rank: "Hearts"
     },  {
         fileName: "Hearts_9.png",
-        value: "A",
+        value: "9",
         rank: "Hearts"
     },  {
         fileName: "Hearts_10.png",
-        value: "A",
+        value: "10",
         rank: "Hearts"
     },  {
         fileName: "Hearts_J.png",
-        value: "A",
+        value: "J",
         rank: "Hearts"
     },  {
         fileName: "Hearts_Q.png",
-        value: "A",
+        value: "Q",
         rank: "Hearts"
     },  {
         fileName: "Hearts_K.png",
-        value: "A",
+        value: "K",
         rank: "Hearts"
     },  {
         fileName: "Spades_ACE.png",
@@ -184,51 +183,51 @@ const cardList = [
         rank: "Spades"
     },  {
         fileName: "Spades_2.png",
-        value: "A",
+        value: "2",
         rank: "Spades"
     },  {
         fileName: "Spades_3.png",
-        value: "A",
+        value: "3",
         rank: "Spades"
     },  {
         fileName: "Spades_4.png",
-        value: "A",
+        value: "4",
         rank: "Spades"
     },  {
         fileName: "Spades_5.png",
-        value: "A",
+        value: "5",
         rank: "Spades"
     },  {
         fileName: "Spades_6.png",
-        value: "A",
+        value: "6",
         rank: "Spades"
     },  {
         fileName: "Spades_7.png",
-        value: "A",
+        value: "7",
         rank: "Spades"
     },  {
         fileName: "Spades_8.png",
-        value: "A",
+        value: "8",
         rank: "Spades"
     },  {
         fileName: "Spades_9.png",
-        value: "A",
+        value: "9",
         rank: "Spades"
     },  {
         fileName: "Spades_10.png",
-        value: "A",
+        value: "10",
         rank: "Spades"
     },  {
         fileName: "Spades_J.png",
-        value: "A",
+        value: "J",
         rank: "Spades"
     },  {
         fileName: "Spades_Q.png",
-        value: "A",
+        value: "Q",
         rank: "Spades"
     },  {
         fileName: "Spades_K.png",
-        value: "A",
+        value: "K",
         rank: "Spades"
     },  
 ];
@@ -336,6 +335,10 @@ let hand = [
     }
 ];
 
+
+
+let activeCards = []; // Array to determine active card positions
+
 let enemyHand = [
     {
         position: "cardE1",
@@ -389,6 +392,8 @@ let enemyHand = [
     }
 ];
 
+let activeEnemyCards = [];
+
 // page elements
 
 
@@ -420,7 +425,7 @@ function deal() {
         hand[i].filePath = deck[0].fileName;
         hand[i].value = deck[0].value;
         hand[i].rank = deck[0].rank; 
-        deck.shift();
+        // deck.shift();
         changeImg(hand[i].position, hand[i].filePath);
 
     }
@@ -435,35 +440,37 @@ function changeImg(position, card) { // Changes the card image on the website
 shuffleAlgorithm(cardList);
 deal();
 
-function clicked(pos, active) {
+
+function clicked(pos, active,) {
     if(active === false) {
-        if (activatedCount < 4) {
+        if (activeCards.length < 4) {
             hand[pos].active = true;
-            activatedCount++;
+            activeCards.push(pos);
+            
 
             activeField.insertAdjacentElement('afterbegin', hand[pos].var);
-            if (activatedCount > 0) {
+            if (activeCards.length > 0) {
                 placeElement.innerText = "Show";
             }
-
+            console.log(activeCards.length);
         } else {
         };
         
     } else {
         hand[pos].active = false;
         handField.insertAdjacentElement('afterbegin', hand[pos].var);
-
-        activatedCount--;
-        if (activatedCount === 0) {
+        const toBeRemoved = activeCards.indexOf(pos);
+        activeCards.splice(toBeRemoved, 1)
+        if (activeCards.length === 0) {
             placeElement.innerText = "Rummy";
         }
-        console.log(activatedCount);
+        console.log(activeCards.length);
 
     };
 }
 
 function discard(deckInfo, player) { //TODO: add code that reshuffles the deck once the discard pile has too many cards. May need a variable to adjust for cards that are locked.
-    if (activatedCount === 1) { // Checks if more than one card is selected
+    if (activeCards.length === 1) { // Checks if more than one card is selected
         
         // Variables, exclusive to this block
         let discardCard = {};
@@ -500,7 +507,7 @@ function discard(deckInfo, player) { //TODO: add code that reshuffles the deck o
         }
         }
         clicked(cardPos, true);
-    } else if (activatedCount > 1) {
+    } else if (activeCards.length > 1) {
         console.log("too many cards selected")
     }
 }
@@ -514,8 +521,62 @@ function locked(cardPosition, turn) {
     toBeHidden.style.display = "none";
 }
 
+// TODO: Rewrite function and test throughout
 
-function showRummy(activatedCountCheck, handCheck, meldsThreeCheck, meldsFourCheck, whoIs) { // Show cards or Rummy cards (Rummy = all cards shown at once)
+const allEqual = arr => arr.every(val => val === arr[0]);
+
+function showRummy(handField, meldsThreeField, meldsFourField, activeCardsArray, whoIs) {
+    if (activeCardsArray.length === 0) { // Rummy function
+        console.log("rummy");
+        
+
+    } else if (activeCardsArray.length === 3 && meldsThreeField <= 2) { // Three meld function
+        console.log("meld of three");
+        let meldHand = [];
+        for (let i = 0; i < 3; i++) {
+            meldHand.push(handField[activeCardsArray[i]]); // Tested, works correctly
+            console.log(meldHand[i]);
+        }
+        const cardValues = meldHand.map((card) => { // Tested, works correctly
+            return card.value;
+        })
+
+        const allMeldTrue = allEqual(cardValues); // Tested, works correctly
+
+        console.log(allMeldTrue);
+
+        // console.log(cardValues);
+
+        /* 
+            const cardValues = meldHand.map(( card ) => {card.value})  Extract individual card values from a meld
+
+            const allMeldTue = allEqual(cardValues) Checks all cards in array are the same and returns true or false
+        
+        */
+
+        // for (let i = 0; activeCardsArray.length <= 2; i++) { // Checks if cards are a set
+        //     if (handField[activeCardsArray[i]].value === matchingValue) { 
+        //         matching++;
+        //     }
+        //     if (matching === 3) { // if all three values are matching, it is a set.
+        //         set = true;
+        //     }
+        //     console.log(set);
+        //}
+
+    } else if (activeCardsArray.length === 4 && meldsFourField === false) { // Four meld function
+        console.log("meld of four");
+
+
+
+    } else {
+        console.log("not enough cards selected");
+    }
+
+
+}
+
+/* function showRummy(activatedCountCheck, handCheck, meldsThreeCheck, meldsFourCheck, whoIs) { // Show cards or Rummy cards (Rummy = all cards shown at once)
     let activeCards = [];
     let cardPositions = [];
     if (activatedCountCheck === 0) { // Rummy function
@@ -546,9 +607,11 @@ function showRummy(activatedCountCheck, handCheck, meldsThreeCheck, meldsFourChe
 
     } else if (activatedCountCheck === 4 && meldsFourCheck === 0) {
 
-    }
-}
+    } 
+} */
 
+
+    
 // note to self: learn e.preventDefault and how it works
 card1.addEventListener("click", ((e) => {
     e.preventDefault();
@@ -598,3 +661,7 @@ discardElement.addEventListener("click", ((e) => {
     e.preventDefault();
     discard('discard', true);
 }))
+placeElement.addEventListener("click", ((e) => {
+    e.preventDefault();
+    showRummy(hand, meldsThree, meldsFour, activeCards, "player");
+})) 
