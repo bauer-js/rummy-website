@@ -536,7 +536,7 @@ function lockCards(lock, whoIs) { // lock variable is an array of the card posit
 const allEqual = arr => arr.every(val => val === arr[0]);
 let meldsThreePlayer = [];
 let meldsFourPlayer = []
-function showRummy(handField, activeCardsArray, whoIs) {
+function showRummy(handField, activeCardsArray, whoIs, meldsFieldThree, meldsFieldFour) {
     if (activeCardsArray.length === 0) { // Rummy function
         console.log("rummy");
         
@@ -581,8 +581,50 @@ function showRummy(handField, activeCardsArray, whoIs) {
 
         }
 
-    } else if (activeCardsArray.length === 4) { // Four meld function
+
+
+
+
+    } else if (activeCardsArray.length === 4 && meldsFieldFour.length != 4) { // Four meld function
         console.log("meld of four");
+
+        let meldHand = [];
+        for (let i = 0; i < 4; i++) {
+            meldHand.push(handField[activeCardsArray[i]]); // Tested, works correctly
+            console.log(meldHand[i]);
+        }
+        const cardValues = meldHand.map((card) => { // Gets card values
+            return card.value;
+        })
+        const cardRanks = meldHand.map((card) => { // Gets card ranks
+            return card.rank;
+        })
+
+        // Checks if it is a set
+
+        const allMeldValueTrue = allEqual(cardValues); 
+
+        // Checks if it is a run
+
+        const allMeldRankTrue = allEqual(cardRanks); 
+
+
+        // Conditions to decide whether it is a set or run.
+
+        console.log(allMeldValueTrue);
+        if (allMeldValueTrue === true) {
+            if (whoIs === "player") {
+                lockCards(activeCardsArray, "player");
+                for (let n = 0; meldHand.length != n; n++) {
+                    meldsFourPlayer.push(meldHand[n]); // Tested, IT WORKS WOOOOOO
+                }
+                console.log(meldsFourPlayer);
+            } else if (whoIs === "enemy") {
+                
+            }
+        } else if (true) {
+            
+        }
 
 
 
@@ -680,5 +722,5 @@ discardElement.addEventListener("click", ((e) => {
 }))
 placeElement.addEventListener("click", ((e) => {
     e.preventDefault();
-    showRummy(hand, activeCards, "player");
+    showRummy(hand, activeCards, "player", meldsThreePlayer, meldsFourPlayer);
 })) 
